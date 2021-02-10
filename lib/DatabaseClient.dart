@@ -23,7 +23,7 @@ class DatabaseClient {
     var res = await db.rawInsert(
         "INSERT Into contactList (name,email,phone)"
             " VALUES (${contactModel.name},${contactModel.email},${contactModel.phone})");
-   // return res;
+     return res;
 
   /*  var res2 = await db.insert("contactList", contactModel.toMap());
     return res2;*/

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'addContact.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -38,14 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
       ),
       body: Center(
+        child: Text("No contact found"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>
+                AddContact()),
+          );
         },
-        tooltip: 'Increment',
+        tooltip: 'Create new contact',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+
