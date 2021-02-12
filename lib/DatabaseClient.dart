@@ -18,15 +18,15 @@ class DatabaseClient {
     return _database;
   }
 
-   insertContactData(ContactModel contactModel) async{
+  Future<int> insertContactData(ContactModel contactModel) async{
     final db = await database;
-    var res = await db.rawInsert(
-        "INSERT Into contactList (name,email,phone)"
-            " VALUES (${contactModel.name},${contactModel.email},${contactModel.phone})");
-     return res;
+     /*var res = await db.rawInsert(
+      "INSERT Into contactList (name,email,phone)"
+             " VALUES (${contactModel.name},${contactModel.email},${contactModel.phone})");
+      return res;*/
 
-  /*  var res2 = await db.insert("contactList", contactModel.toMap());
-    return res2;*/
+    var res2 = await db.insert("contactList", contactModel.toMap());
+    return res2;
   }
 
   initDB() async {
@@ -34,10 +34,11 @@ class DatabaseClient {
     String path = join(documentsDirectory.path, "contact.db");
     return await openDatabase(path, version: 1, onOpen: (db) {
     }, onCreate: (Database db, int version) async {
+      print("========================");
       await db.execute("CREATE TABLE contactList ("
           "id INTEGER PRIMARY KEY AUTOINCREMENT,"
           "name TEXT,"
-          "email TEXT,"
+          "email VARCHAR (20),"
           "phone TEXT"
           ")");
     });
