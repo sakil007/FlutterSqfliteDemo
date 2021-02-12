@@ -1,3 +1,5 @@
+import 'package:contactapp/ContactModel.dart';
+import 'package:contactapp/DatabaseClient.dart';
 import 'package:flutter/material.dart';
 
 import 'addContact.dart';
@@ -31,7 +33,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  DatabaseClient databaseClient;
+ List<ContactModel> contactList=  List();
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    databaseClient= DatabaseClient.db;
+
+    databaseClient.readAllContact().then((value) {
+      contactList = value;
+      setState(() {
+
+      });
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -39,8 +57,23 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
           title: Text(widget.title),
       ),
-      body: Center(
-        child: Text("No contact found"),
+      body: Container(
+        child: contactList.length>0?
+        ListView.builder(
+          itemCount: contactList.length,
+          itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Card(
+              child: Column(
+                children: [
+                  Text(contactList[index].name),
+                  Text(contactList[index].phone),
+                ],
+              ),
+            ),
+          ),
+        )
+            :Text("No contact found"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
@@ -48,7 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
             context,
             MaterialPageRoute(builder: (context) =>
                 AddContact()),
-          );
+          ).then((value) {
+            databaseClient.readAllContact().then((value) {
+              contactList = value;
+              setState(() {
+
+              });
+            });
+          });
         },
         tooltip: 'Create new contact',
         child: Icon(Icons.add),

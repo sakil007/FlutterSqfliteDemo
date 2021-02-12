@@ -81,6 +81,7 @@ class _addContact extends State<AddContact>{
                        return null;
                      },
                      keyboardType: TextInputType.number,
+                     maxLength: 10,
                      decoration: InputDecoration(
                        hintText: "Enter your phone",
                        prefix: Text("+91"),
@@ -114,8 +115,12 @@ class _addContact extends State<AddContact>{
                              name: nameController.text,
                              phone: phoneController.text));
 
-                         showToast("Success"+databaseID.toString());
-                       }else{
+                         if(databaseID!=-1){
+                           showToast("Success"+databaseID.toString());
+                         }else{
+                           showToast("phone already saved");
+                         }
+                         }else{
                          showToast("failed");
                        }
 

@@ -20,13 +20,25 @@ class DatabaseClient {
 
   Future<int> insertContactData(ContactModel contactModel) async{
     final db = await database;
-     /*var res = await db.rawInsert(
-      "INSERT Into contactList (name,email,phone)"
-             " VALUES (${contactModel.name},${contactModel.email},${contactModel.phone})");
-      return res;*/
 
-    var res2 = await db.insert("contactList", contactModel.toMap());
-    return res2;
+    var res =await  db.query("contactList",
+        where: "phone = ?", whereArgs: [contactModel.phone]);
+
+    var id= res.isNotEmpty ?
+        -1
+        :  await db.insert("contactList", contactModel.toMap());
+
+    return id;
+  }
+
+  Future<List<ContactModel>> readAllContact() async{
+    final db = await database;
+    var res = await db.query("contactList");
+    List<ContactModel> list =
+    res.isNotEmpty ?
+    res.map((c) => ContactModel.fromMap(c)).toList()
+        : [];
+    return list;
   }
 
   initDB() async {
