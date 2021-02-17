@@ -31,6 +31,6 @@ ContactModel contactFromJson(String str) {
 }
 
 String contactToJson(ContactModel data) {
-  final dyn = data.toMap();
+  Map dyn = data.toMap();
   return json.encode(dyn);
 }

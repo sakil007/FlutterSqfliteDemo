@@ -17,6 +17,19 @@ class DatabaseClient {
     _database = await initDB();// create database
     return _database;
   }
+  
+  
+  Future<int> deleteContact(String phone) async{
+    final db = await database;
+    return await db.delete("contactList", where: 'phone = ?', whereArgs: [phone]);
+  }
+
+  Future<int> updateContact(ContactModel contactModel) async {
+    final db = await database;
+
+    return await db.update('contactList', contactModel.toMap(),
+        where: 'phone = ?', whereArgs: [contactModel.phone]);
+  }
 
   Future<int> insertContactData(ContactModel contactModel) async{
     final db = await database;

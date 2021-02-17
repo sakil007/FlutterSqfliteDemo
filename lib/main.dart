@@ -1,5 +1,6 @@
 import 'package:contactapp/ContactModel.dart';
 import 'package:contactapp/DatabaseClient.dart';
+import 'package:contactapp/UpdateContact.dart';
 import 'package:flutter/material.dart';
 
 import 'addContact.dart';
@@ -34,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DatabaseClient databaseClient;
- List<ContactModel> contactList=  List();
+  List<ContactModel> contactList=  List();
 
   @override
   void initState() {
@@ -61,14 +62,69 @@ class _MyHomePageState extends State<MyHomePage> {
         child: contactList.length>0?
         ListView.builder(
           itemCount: contactList.length,
-          itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Card(
-              child: Column(
-                children: [
-                  Text(contactList[index].name),
-                  Text(contactList[index].phone),
-                ],
+          itemBuilder: (context, index) => InkWell(
+            onLongPress: (){
+              return showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text("Alert"),
+                  content: Text("Do you want to delete"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: ()  async {
+                        var id=await databaseClient.
+                        deleteContact(contactList[index].phone);
+                        contactList.removeAt(index);
+                        setState(() {
+
+                        });
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Text("yes"),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Text("cancel"),
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Card(
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(contactList[index].name),
+                        Text(contactList[index].phone),
+
+                      ],
+                    ),
+                    Spacer(),
+                    IconButton(
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>
+                            UpdateContact(contactList[index]))).then((value) {
+                          databaseClient.readAllContact().then((value) {
+                            contactList = value;
+                            setState(() {
+
+                            });
+                          });
+                        });
+
+                      },
+                      icon: Icon(Icons.edit),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -96,5 +152,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
