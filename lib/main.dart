@@ -3,6 +3,7 @@ import 'package:contactapp/DatabaseClient.dart';
 import 'package:contactapp/UpdateContact.dart';
 import 'package:flutter/material.dart';
 
+import 'ImagePicker.dart';
 import 'addContact.dart';
 
 void main() {
@@ -17,10 +18,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
            visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ImagePickerScreen(),
     );
   }
 }
@@ -32,6 +33,20 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class _MyHomePageState extends State<MyHomePage> {
   DatabaseClient databaseClient;
