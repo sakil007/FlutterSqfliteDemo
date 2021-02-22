@@ -1,6 +1,7 @@
 import 'package:contactapp/ContactModel.dart';
 import 'package:contactapp/DatabaseClient.dart';
 import 'package:contactapp/UpdateContact.dart';
+import 'package:contactapp/location_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'ImagePicker.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.red,
            visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: ImagePickerScreen(),
+      home: LocationScreen(),
     );
   }
 }
