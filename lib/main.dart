@@ -5,6 +5,7 @@ import 'package:contactapp/location_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'ImagePicker.dart';
+import 'MapViewScreen.dart';
 import 'addContact.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.red,
            visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LocationScreen(),
+      home: MapViewScreen(),
     );
   }
 }
@@ -34,19 +35,6 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class _MyHomePageState extends State<MyHomePage> {
