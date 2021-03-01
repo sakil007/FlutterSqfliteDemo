@@ -1,7 +1,9 @@
 import 'package:contactapp/ContactModel.dart';
 import 'package:contactapp/DatabaseClient.dart';
+import 'package:contactapp/SocialLogin.dart';
 import 'package:contactapp/UpdateContact.dart';
 import 'package:contactapp/location_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'ImagePicker.dart';
@@ -9,6 +11,7 @@ import 'MapViewScreen.dart';
 import 'addContact.dart';
 
 void main() {
+
   runApp(MyApp());
 }
 
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.red,
            visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MapViewScreen(),
+      home: SocialLogin(),
     );
   }
 }
