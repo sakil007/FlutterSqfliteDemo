@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contact App</string>
+
+    <string name="facebook_app_id">170268708072201</string>
+    <string name="fb_login_protocol_scheme">fb170268708072201</string>
+</resources>
+      
+<!-- keytool -exportcert -alias androiddebugkey -keystore "C:\Users\animesh-104\.android\debug.keystore" | "PATH_TO_OPENSSL_LIBRARY\bin\openssl" sha1 -binary | "PATH_TO_OPENSSL_LIBRARY\bin\openssl" base64
+      
+
+      
+keytool -exportcert -alias YOUR_RELEASE_KEY_ALIAS -keystore YOUR_RELEASE_KEY_PATH | openssl sha1 -binary | openssl base64
+
+
+order_id -->

@@ -5,6 +5,7 @@ import 'package:contactapp/UpdateContact.dart';
 import 'package:contactapp/location_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 import 'ImagePicker.dart';
 import 'MapViewScreen.dart';
@@ -158,4 +159,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
 }
